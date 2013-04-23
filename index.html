@@ -37,22 +37,28 @@
         <div class="page homeSearch">
             {{view Ember.TextField valueBinding="query" type="search" action="search"}}
             <table class="table">
-            {{#each controller.content}}
+            {{#each controller.results}}
                 <tr>
-                    <td><strong>{{form}}</strong> - {{gloss}}</td>
+                    <td><strong>{{form}}</strong> - <small>{{sense.category}},</small> {{sense.gloss}}</td>
                     </tr>
                 {{/each}}
             </table>
+            
+            {{#unless controller.results}}
+                <p>No entries found for "{{query}}".</p>
+            {{/unless}}
         </div>
     </script>
     
     
     
     <!-- Javascripts -->
-    <script src="vendor/jquery-1.9.1.js"></script>
+    <script src="vendor/jquery-1.8.3.min.js"></script>
     <script src="vendor/underscore-min.js"></script>
     <script src="vendor/handlebars-1.0.0-rc.3.js"></script>
     <script src="vendor/ember-1.0.0-rc.3.js"></script>
+    <script src="data/akoos_syn.js"></script>
      <script src="app.js"></script>
+     
 </body>
 </html>

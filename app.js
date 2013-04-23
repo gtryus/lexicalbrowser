@@ -1,5 +1,3 @@
-var FAKE_DATA = []
-
 App = Ember.Application.create();
 
 App.Router.map(function() {
@@ -8,12 +6,16 @@ App.Router.map(function() {
 
 
 App.SearchRoute = Ember.Route.extend({
-    model: function(params){
+    model: function(params){ // Only called when the user changes the url, not when the url is transitioned to.
         return {query: params.query}
     },
     setupController: function(controller, model) {
-        controller.set('query', model.query);
-        controller.set('content', search(model.query));
+        // I wonder if there might be a better way to do the below
+        if(_.isString(model)){
+            controller.set('query', model);
+        }else if(model.query != undefined){
+            controller.set('query', model.query);
+        }
       }
 })
 
@@ -29,16 +31,22 @@ App.SearchController = Ember.Controller.extend({
     query: '',
     search: function(){
         this.transitionToRoute('search', this.get('query'));
-    }
+    },
+    
+    results: function(){
+        return search(this.get('query'))
+    }.property('query')
 });
 
 
+
+// Data
+var entries = DATA.database.entry // DATA comes from a json file loaded from the HTML
+
 // Takes a query, and returns a list of results
-// Faked out for now
 function search(query){
-    return [
-        {'form':'Ixqupu', 'gloss': 'Test'},
-        {'form':'HzOoo', 'gloss': 'Running'},
-        {'form':'Lnxx', 'gloss': 'Cooking'},
-    ]
+    if(query.length < 2){ return [] }
+    return _.filter(entries, function(entry){
+        return (entry.sense.gloss && entry.sense.gloss.indexOf(query) !== -1) || entry.form.indexOf(query) !== -1
+    })
 }
