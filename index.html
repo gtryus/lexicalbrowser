@@ -37,6 +37,7 @@
         <div class="page homeSearch">
             {{view Ember.TextField valueBinding="query" type="search" action="search"}}
             <button {{action "clear"}} class="btn">Clear</button>
+            {{#linkTo "index"}}Home{{/linkTo}}
             <table class="table">
             {{#each controller.results}}
                 <tr>
