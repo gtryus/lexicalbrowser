@@ -46,7 +46,15 @@ var entries = DATA.database.entry // DATA comes from a json file loaded from the
 // Takes a query, and returns a list of results
 function search(query){
     if(query.length < 2){ return [] }
-    return _.filter(entries, function(entry){
+    var matches = _.filter(entries, function(entry){
         return (entry.sense.gloss && entry.sense.gloss.indexOf(query) !== -1) || entry.form.indexOf(query) !== -1
     })
+    var synonyms = []
+    for (i = 0; i < matches.length; i++) {
+        var results = _.filter(entries, function(entry) {
+            return (entry.sense.id == matches[i].sense.synonyms.ref)
+        })
+        synonyms = synonyms.concat(results);
+    }
+    return synonyms
 }
