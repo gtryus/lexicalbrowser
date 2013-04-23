@@ -6,7 +6,14 @@ App.Router.map(function() {
 
 App.IndexRoute = Ember.Route.extend({
   model: function() {
-    return {name: 'World'};
+    return {hello: 'World'};
   }
 });
 
+
+App.IndexController = Ember.Controller.extend({
+    search: function(){
+        alert('You have pressed search')
+        // this.transitionToRoute('search', this.get('query'));
+    }
+});
