@@ -35,15 +35,14 @@
     
     <script type="text/x-handlebars" data-template-name="search">
         <div class="page homeSearch">
-            <h1>"Word"</h1>
+            {{view Ember.TextField valueBinding="query" type="search" action="search"}}
             <table class="table">
+            {{#each controller.content}}
                 <tr>
-                    <td><strong>Thing A</strong> - Lorem ipsum dolor sit amet.....</td>
-                </tr>
-                <tr>
-                    <td><strong>Thing A</strong> - Lorem ipsum dolor sit amet.....</td>
-                </tr>
-            </ul>
+                    <td><strong>{{form}}</strong> - {{gloss}}</td>
+                    </tr>
+                {{/each}}
+            </table>
         </div>
     </script>
     
