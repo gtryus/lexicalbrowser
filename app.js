@@ -1,19 +1,22 @@
+var FAKE_DATA = []
+
 App = Ember.Application.create();
 
 App.Router.map(function() {
-    // this.route('search')
+    this.route('search', {'path': '/search/:q'})
 })
 
-App.IndexRoute = Ember.Route.extend({
-  model: function() {
-    return {hello: 'World'};
-  }
-});
+
+App.SearchRoute = Ember.Route.extend({
+    model: function(){
+        return []
+    }
+})
 
 
 App.IndexController = Ember.Controller.extend({
     search: function(){
-        alert('You have pressed search')
-        // this.transitionToRoute('search', this.get('query'));
+        this.transitionToRoute('search', this.get('query'));
     }
 });
+
