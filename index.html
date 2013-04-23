@@ -5,15 +5,35 @@
     <title>Lexical Browser</title>
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/bootstrap-responsive.min.css" >
     
-    
+    <!-- For responsive css -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
-    <div class="container">
-        Test
-    </div>
+    
+        <!-- Main application template -->
+        <script type="text/x-handlebars">
+            <div class="container">
+                 {{outlet}}
+             </div>
+        </script>        
     
     
+    <!-- More templates -->
+    <script type="text/x-handlebars" data-template-name="index">
+        <div class="page homeSearch">
+            <h1>Dictionary</h1>
+            <div style="margin-top:2em;">
+                {{view Ember.TextField valueBinding="query" type="search"}}
+            </div>
+            <div style="margin-top:1em;">
+                <button {{action "search"}} class="btn">Search</button>
+            </div>
+        </div>
+    </script>
+    
+    <!-- Javascripts -->
     <script src="vendor/jquery-1.9.1.js"></script>
     <script src="vendor/underscore-min.js"></script>
     <script src="vendor/handlebars-1.0.0-rc.3.js"></script>
