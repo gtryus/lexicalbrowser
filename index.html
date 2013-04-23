@@ -36,6 +36,7 @@
     <script type="text/x-handlebars" data-template-name="search">
         <div class="page homeSearch">
             {{view Ember.TextField valueBinding="query" type="search" action="search"}}
+            <button {{action "clear"}} class="btn">Clear</button>
             <table class="table">
             {{#each controller.results}}
                 <tr>
