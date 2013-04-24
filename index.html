@@ -45,7 +45,7 @@
             <table class="table">
             {{#each controller.results}}
                 <tr>
-                    <td><strong style="font-family:CharisSILB;"> {{#linkTo "search" form}}{{form}}{{/linkTo}}</strong> - <small>{{sense.category}},</small> {{#linkTo "search" sense.gloss}}{{sense.gloss}}{{/linkTo}}</td>
+                    <td><strong style="font-family:CharisSILB;"> {{#linkTo "search" form}}{{form}}{{/linkTo}}</strong> - <small>{{sense.category}},</small> {{#linkTo "search" sense.gloss}}/{{sense.gloss}}/{{/linkTo}}</td>
                     </tr>
                 {{/each}}
             </table>
