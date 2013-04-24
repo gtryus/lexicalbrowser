@@ -5,9 +5,7 @@ var entriesById = _.chain(entries)
     .map(function(entry){ 
         if(entry.sense.id == undefined){ return ['',entry] }
         return [entry.sense.id, entry]
-    })
-    .object()
-    .value()
+    }).object().value()
     
     
 // Takes a query, and returns a list of synonym entries
