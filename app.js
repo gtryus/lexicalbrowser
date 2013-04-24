@@ -1,30 +1,30 @@
 // DATA comes from a json file loaded from the HTML
 var entries = DATA.database.entry; 
-// create a dict of entries, organized by IDs.
+// A dict of entries, organized by IDs.
 var entriesById = _.chain(entries)
     .map(function(entry){ 
         if(entry.sense.id == undefined){ return ['',entry] }
         return [entry.sense.id, entry]
     }).object().value()
-    
-    
+
+
 // Takes a query, and returns a list of synonym entries
 function search(query) {
-    var matches, synonyms
+    var matches
     if (query.length < 2) { return []; }
     // Select all matching entries
     matches = _.filter(entries, function(entry) {
         return (entry.sense.gloss && entry.sense.gloss.indexOf(query) !== -1) || entry.form.indexOf(query) !== -1;
     })
     // Now get the synonyms of those entries, instead of the entries themselves.
-    synonyms = _.chain(matches).map(synonyms).flatten(true).value()
-    return synonyms;
+    return _.chain(matches).map(synonyms).flatten(true).value()
 }
 
 // Takes an entry, returns it's synonym entries
 function synonyms(entry){
     return _.map(entry.sense.synonyms,  function(ref){ return entriesById[ref]} )
 }
+
 
 
 App = Ember.Application.create();
