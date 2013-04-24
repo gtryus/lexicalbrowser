@@ -17,11 +17,12 @@ function search(query) {
         return (entry.sense.gloss && entry.sense.gloss.indexOf(query) !== -1) || entry.form.indexOf(query) !== -1;
     })
     // Now get the synonyms of those entries, instead of the entries themselves.
-    return _.chain(matches).map(synonyms).flatten(true).value()
+    return _.chain(matches).map(synonyms).flatten(true).compact().value()
 }
 
 // Takes an entry, returns it's synonym entries
 function synonyms(entry){
+    if(entry == undefined || entry.sense.synonyms==undefined){ return []}
     return _.map(entry.sense.synonyms,  function(ref){ return entriesById[ref]} )
 }
 
