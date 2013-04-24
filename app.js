@@ -52,5 +52,9 @@ App.SearchController = Ember.Controller.extend({
 	},
 	results: function() {
 		return search(this.get('query'));
-	}.property('query')
+	}.property('query'),
+
+	clear: function(){
+		this.set('query', '')
+	}
 });
