@@ -36,6 +36,8 @@
     <script type="text/x-handlebars" data-template-name="search">
         <div class="page homeSearch">
             {{view Ember.TextField valueBinding="query" type="search" action="search"}}
+            <button {{action "clear"}} class="btn">Clear</button>
+            {{#linkTo "index"}}Home{{/linkTo}}
             <table class="table">
             {{#each controller.results}}
                 <tr>
@@ -57,7 +59,7 @@
     <script src="vendor/underscore-min.js"></script>
     <script src="vendor/handlebars-1.0.0-rc.3.js"></script>
     <script src="vendor/ember-1.0.0-rc.3.js"></script>
-    <script src="data/akoose_syn.js"></script>
+    <script src="data/Akoose_syn.js"></script>
      <script src="app.js"></script>
      
 </body>
