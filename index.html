@@ -6,7 +6,9 @@
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/bootstrap-responsive.min.css">
-    <link rel="apple-touch-icon" href="apple-touch-icon.png">
+    
+    <!-- Icons -->
+    <link rel="apple-touch-icon" href="img/logo/Icon-2x.png">
     <link rel="shortcut icon" href="favicon.ico" />
 
     <!-- For responsive css -->
@@ -43,7 +45,7 @@
             <table class="table">
             {{#each controller.results}}
                 <tr>
-                    <td><strong><span style="font-family:CharisSILB;">{{form}}</span></strong> <small>{{sense.category}}</small> /{{sense.gloss}}/</td>
+                    <td><strong style="font-family:CharisSILB;"> {{#linkTo "search" form}}{{form}}{{/linkTo}}</strong> - <small>{{sense.category}},</small> {{#linkTo "search" sense.gloss}}{{sense.gloss}}{{/linkTo}}</td>
                     </tr>
                 {{/each}}
             </table>
