@@ -1,3 +1,27 @@
+@font-face {
+ font-family : CharisSILR;
+ font-weight : normal;
+ font-style : normal;
+ src : url('font/CharisSILR.ttf');
+}
+@font-face {
+ font-family : CharisSILB;
+ font-weight : bold;
+ font-style : normal;
+ src : url('font/CharisSILB.ttf');
+}
+@font-face {
+ font-family : CharisSILI;
+ font-weight : normal;
+ font-style : italic;
+ src : url('font/CharisSILI.ttf');
+}
+@font-face {
+ font-family : CharisSILBI;
+ font-weight : bold;
+ font-style : italic;
+ src : url('font/CharisSILBI.ttf');
+}
 .container > .homeSearch, .container > .homeSearch h1{
     text-align:center;
 }
