@@ -51,7 +51,11 @@
             </table>
             
             {{#unless controller.results}}
-                <p>No entries found for "{{query}}".</p>
+                {{#unless controller.query}}
+                    <p>Enter a word</p>
+                {{else}}
+                    <p>No entries found for "{{query}}"</p>
+                {{/unless}}
             {{/unless}}
         </div>
     </script>
