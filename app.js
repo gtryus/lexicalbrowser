@@ -12,6 +12,7 @@ var entriesById = _.chain(entries)
 function search(query) {
     var matches
     if (query.length < 2) { return []; }
+    query = query.toLowerCase()
     // Select all matching entries
     matches = _.filter(entries, function(entry) {
         return (entry.sense.gloss && entry.sense.gloss.indexOf(query) !== -1) || entry.form.indexOf(query) !== -1;
