@@ -29,7 +29,7 @@
         <div class="page homeSearch">
             <h1>Akoose<br>Dictionary</h1>
             <div style="margin-top:2em;">
-                {{view Ember.TextField valueBinding="query" type="search" action="search"}}
+                {{view Ember.TextField valueBinding="query" type="search" action="search" id="query"}}
             </div>
             <div style="margin-top:1em;">
                 <button {{action "search"}} class="btn">Search</button>

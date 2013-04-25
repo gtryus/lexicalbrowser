@@ -76,5 +76,6 @@ App.SearchController = Ember.Controller.extend({
 
     append: function(ch) {
         this.set('query', this.get('query') + ch)
+        $('input[type=search]').focus()
     }
 });
