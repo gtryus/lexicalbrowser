@@ -19,7 +19,7 @@
         <!-- Main application template -->
         <script type="text/x-handlebars">
             <header>
-                <h1>Akoose<br>Thesaurus</h1>
+                <h3>Akoose Thesaurus</h3>
             </header>
             <div class="container">
                  {{outlet}}
@@ -57,9 +57,9 @@
             </div>
 
             <table class="table">
-            {{#each controller.results}}
-                <tr>
-                    <td><strong class="specialFont"> {{#linkTo "search" form}}{{form}}{{/linkTo}}</strong> - <small>{{sense.category}},</small> {{#linkTo "search" sense.gloss}}/{{sense.gloss}}/{{/linkTo}}</td>
+                {{#each controller.results}}
+                    <tr>
+                        <td><strong class="specialFont"> {{#linkTo "search" form}}{{form}}{{/linkTo}}</strong> - <small>{{sense.category}},</small> {{#linkTo "search" sense.gloss}}/{{sense.gloss}}/{{/linkTo}}</td>
                     </tr>
                 {{/each}}
             </table>

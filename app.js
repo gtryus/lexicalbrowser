@@ -17,7 +17,7 @@ var appExtendedChars = ['á', 'ā', 'â', 'ǎ',
     'ɔ', 'ɔ́', 'ɔ̄', 'ɔ̂', 'ɔ̌',
     'ú', 'ū', 'û', 'ǔ',
     'ń', 'ḿ', 'ŋ', 'ŋ́',
-    'ʼ', 'ː', '’'];
+    'ʼ', 'ː'];
 
 // Takes an entry, returns it's synonym entries
 function synonyms(entry) {
