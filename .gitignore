@@ -19,5 +19,8 @@ local.properties
 .classpath
 .project
 
+# Visual studio files
+Web.config
+
 # other files
 *~
