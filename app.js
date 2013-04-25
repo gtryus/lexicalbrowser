@@ -40,12 +40,10 @@ App.SearchRoute = Ember.Route.extend({
         return {query: params.query};
     },
     setupController: function(controller, model) {
-        // I wonder if there might be a better way to do the below
-        if (_.isString(model)) {
-            controller.set('query', model);
-        } else if (model.query !== undefined) {
-            controller.set('query', model.query);
-        }
+        // Sometimes the query is passed in as an attribute of the model, sometimes as the model itself.
+        var query= model.query || model
+        // Check for unescaped unicode characters (which show up on IOS)
+        controller.set('query', decodeURIComponent(query));
     }
 });
 
