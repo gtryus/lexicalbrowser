@@ -64,6 +64,10 @@ App.IndexController = Ember.Controller.extend({
         this.transitionToRoute('search', this.get('query'));
     },
 
+    clear: function () {
+        this.set('query', '');
+    },
+
     // Some sequences are single characters some are two unicode code points: a base char and an accent
     specialCharacters: appExtendedChars,
 
