@@ -67,12 +67,7 @@ App.SearchController = Ember.Controller.extend({
         this.set('query', '')
     },
 
-    specialCharacters: [{ch:'Á'},{ch:'É'},{ch:'á'},{ch:'â'},{ch:'é'},
-        {ch:'ê'},{ch:'í'},{ch:'î'},{ch:'ó'},{ch:'ô'},{ch:'ú'},{ch:'û'},
-        {ch:'ā'},{ch:'ē'},{ch:'ě'},{ch:'ī'},{ch:'ń'},{ch:'ŋ'},{ch:'ō'},
-        {ch:'ū'},{ch:'ǎ'},{ch:'ǐ'},{ch:'ǒ'},{ch:'ǔ'},{ch:'ɒ'},{ch:'ɔ'},
-        {ch:'ə'},{ch:'ɛ'},{ch:'ʼ'},{ch:'ː'},{ch:'́'},{ch:'̂'},{ch:'̄'},
-        {ch:'̌'},{ch:'Ḿ'},{ch:'ḿ'},{ch:'’'}],
+    specialCharacters: "ÁÉáâéêíîóôúûāēěīńŋōūǎǐǒǔɒɔəɛʼː́̂̄̌Ḿḿ’".split(''),
 
     append: function(ch) {
         this.set('query', this.get('query') + ch)

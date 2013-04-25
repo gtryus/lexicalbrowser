@@ -47,7 +47,7 @@
 
             <div class="specialFont">
                 {{#each controller.specialCharacters}}
-                <span {{action "append" ch}} onclick="">{{ch}}</span>
+                <span {{action "append" .}} onclick="">{{.}}</span>
                 {{/each}}
             </div>
 
