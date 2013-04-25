@@ -34,7 +34,7 @@ function search(query) {
     query = query.toLowerCase();
     // Select all matching entries
     matches = _.filter(appEntries, function (entry) {
-        return (entry.sense.gloss && entry.sense.gloss.indexOf(query) !== -1) || entry.form.indexOf(query) !== -1;
+        return (entry.sense.gloss && entry.sense.gloss.toLowerCase().indexOf(query) !== -1) || entry.form.toLowerCase().indexOf(query) !== -1;
     });
     // Now get the synonyms of those entries, instead of the entries themselves.
     return _.chain(matches).map(synonyms).flatten(true).compact().value();
