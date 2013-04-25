@@ -34,6 +34,8 @@
             <div style="margin-top:1em;">
                 <button {{action "search"}} class="btn">Search</button>
             </div>
+            {{! Preload our SIL font}}
+            <span style="color:white" class="specialFont">.</span>
         </div>
     </script>
     
@@ -51,7 +53,7 @@
             <table class="table">
             {{#each controller.results}}
                 <tr>
-                    <td><strong style="font-family:CharisSILB;"> {{#linkTo "search" form}}{{form}}{{/linkTo}}</strong> - <small>{{sense.category}},</small> {{#linkTo "search" sense.gloss}}/{{sense.gloss}}/{{/linkTo}}</td>
+                    <td><strong class="specialFont"> {{#linkTo "search" form}}{{form}}{{/linkTo}}</strong> - <small>{{sense.category}},</small> {{#linkTo "search" sense.gloss}}/{{sense.gloss}}/{{/linkTo}}</td>
                     </tr>
                 {{/each}}
             </table>
