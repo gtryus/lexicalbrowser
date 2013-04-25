@@ -42,12 +42,12 @@
     <script type="text/x-handlebars" data-template-name="search">
         <div class="page homeSearch">
             {{view Ember.TextField valueBinding="query" type="search" action="search"}}
-            <i {{action "clear"}} class="icon-remove-circle" style="margin-top:-3px; margin-left:-22px;"></i>
+            <i {{action "clear"}} class="icon-remove-circle" style="margin-top:-3px; margin-left:-22px;" onclick=""></i>
             <!-- {{#linkTo "index"}}Home{{/linkTo}} -->
 
             <br />
             {{#each controller.specialCharacters}}
-            <span {{action "append" ch}}>{{ch}}</span>
+            <span {{action "append" ch}} onclick="">{{ch}}</span>
             {{/each}}
 
             <table class="table">
