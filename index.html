@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html><!-- <html manifest="lexicalbrowser.manifest"> -->
 <head>
     <meta charset="utf-8">
     <title>Akoose Dictionary</title>
@@ -42,6 +42,12 @@
             {{view Ember.TextField valueBinding="query" type="search" action="search"}}
             <i {{action "clear"}} class="icon-remove-circle" style="margin-top:-3px; margin-left:-22px;"></i>
             <!-- {{#linkTo "index"}}Home{{/linkTo}} -->
+
+            <br />
+            {{#each controller.specialCharacters}}
+            <span {{action "append" ch}}>{{ch}}</span>
+            {{/each}}
+
             <table class="table">
             {{#each controller.results}}
                 <tr>
