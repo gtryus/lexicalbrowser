@@ -30,9 +30,7 @@
     <!-- More templates -->
     <script type="text/x-handlebars" data-template-name="index">
         <div class="page homeSearch">
-            <div style="margin-top:2em;">
-                {{view Ember.TextField valueBinding="query" type="search" action="search" id="search-font"}}
-            </div>
+            {{view Ember.TextField valueBinding="query" type="search" action="search" id="search-font"}}
             <div class="specialFont">
                 {{#each controller.specialCharacters}}
                 <span {{action "append" .}} onclick="" style="cursor:pointer">{{.}}</span>
