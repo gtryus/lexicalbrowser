@@ -51,6 +51,23 @@ App.IndexController = Ember.Controller.extend({
     query: '',
     search: function() {
         this.transitionToRoute('search', this.get('query'));
+    },
+
+    specialCharacters: ['á', 'ā', 'â', 'ǎ',
+        'ɒ', 'ɒ́', 'ɒ̄', 'ɒ̂', 'ɒ̌',
+        'ɛ', 'ɛ́', 'ɛ̄', 'ɛ̂', 'ɛ̌',
+        'é', 'ē', 'ê', 'ě',
+        'ə', 'ə́', 'ə̄', 'ə̂', 'ə̌',
+        'í', 'ī', 'î', 'ǐ',
+        'ó', 'ô', 'ō', 'ǒ',
+        'ɔ', 'ɔ́', 'ɔ̄', 'ɔ̂', 'ɔ̌',
+        'ú', 'ū', 'û', 'ǔ',
+        'ń', 'ḿ', 'ŋ', 'ŋ́',
+        'ʼ', 'ː', '’'],
+
+    append: function (ch) {
+        this.set('query', this.get('query') + ch)
+        $('input[type=search]').focus()
     }
 });
 
@@ -67,7 +84,17 @@ App.SearchController = Ember.Controller.extend({
         this.set('query', '')
     },
 
-    specialCharacters: "ÁÉáâéêíîóôúûāēěīńŋōūǎǐǒǔɒɔəɛʼː́̂̄̌Ḿḿ’".split(''),
+    specialCharacters: ['á', 'ā', 'â', 'ǎ',
+        'ɒ', 'ɒ́', 'ɒ̄', 'ɒ̂', 'ɒ̌',
+        'ɛ', 'ɛ́', 'ɛ̄', 'ɛ̂', 'ɛ̌',
+        'é', 'ē', 'ê', 'ě',
+        'ə', 'ə́', 'ə̄', 'ə̂', 'ə̌',
+        'í', 'ī', 'î', 'ǐ',
+        'ó', 'ô', 'ō', 'ǒ',
+        'ɔ', 'ɔ́', 'ɔ̄', 'ɔ̂', 'ɔ̌',
+        'ú', 'ū', 'û', 'ǔ',
+        'ń', 'ḿ', 'ŋ', 'ŋ́',
+        'ʼ', 'ː', '’'],
 
     append: function(ch) {
         this.set('query', this.get('query') + ch)

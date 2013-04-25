@@ -33,6 +33,11 @@
             <div style="margin-top:2em;">
                 {{view Ember.TextField valueBinding="query" type="search" action="search" id="search-font"}}
             </div>
+            <div class="specialFont">
+                {{#each controller.specialCharacters}}
+                <span {{action "append" .}} onclick="" style="cursor:pointer">{{.}}</span>
+                {{/each}}
+            </div>
             <div style="margin-top:1em;">
                 <button {{action "search"}} class="btn">Search</button>
             </div>
@@ -45,7 +50,6 @@
         <div class="page homeSearch">
             {{view Ember.TextField valueBinding="query" type="search" action="search" id="search-font"}}
             <i {{action "clear"}} class="icon-remove-circle" style="margin-top:-3px; margin-left:-22px;" onclick=""></i>
-            <!-- {{#linkTo "index"}}Home{{/linkTo}} -->
 
             <div class="specialFont">
                 {{#each controller.specialCharacters}}
