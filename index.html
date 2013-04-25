@@ -2,7 +2,7 @@
 <html><!-- <html manifest="lexicalbrowser.manifest"> -->
 <head>
     <meta charset="utf-8">
-    <title>Akoose Dictionary</title>
+    <title>Akoose Thesaurus</title>
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/bootstrap-responsive.min.css">
     <link rel="stylesheet" href="css/style.css">
@@ -18,6 +18,9 @@
 
         <!-- Main application template -->
         <script type="text/x-handlebars">
+            <header>
+                <h1>Akoose<br>Thesaurus</h1>
+            </header>
             <div class="container">
                  {{outlet}}
              </div>
@@ -27,9 +30,8 @@
     <!-- More templates -->
     <script type="text/x-handlebars" data-template-name="index">
         <div class="page homeSearch">
-            <h1>Akoose<br>Dictionary</h1>
             <div style="margin-top:2em;">
-                {{view Ember.TextField valueBinding="query" type="search" action="search" id="query"}}
+                {{view Ember.TextField valueBinding="query" type="search" action="search" id="search-font"}}
             </div>
             <div style="margin-top:1em;">
                 <button {{action "search"}} class="btn">Search</button>
@@ -41,7 +43,7 @@
     
     <script type="text/x-handlebars" data-template-name="search">
         <div class="page homeSearch">
-            {{view Ember.TextField valueBinding="query" type="search" action="search"}}
+            {{view Ember.TextField valueBinding="query" type="search" action="search" id="search-font"}}
             <i {{action "clear"}} class="icon-remove-circle" style="margin-top:-3px; margin-left:-22px;" onclick=""></i>
             <!-- {{#linkTo "index"}}Home{{/linkTo}} -->
 
