@@ -32,12 +32,13 @@
         <div class="page homeSearch">
             {{view Ember.TextField valueBinding="query" type="search" action="search" id="search-font"}}
             <i {{action "clear"}} class="icon-remove-circle" style="margin-top:-3px; margin-left:-22px;" onclick=""></i>
-            <div class="specialFont">
+            <div class="startfloat"></div>
+            <div class="specialFont" id="specialCharactersBar">
                 {{#each controller.specialCharacters}}
-                <span {{action "append" .}} onclick="" style="cursor:pointer">{{.}}</span>
+                <div {{action "append" .}} onclick="" style="cursor:pointer">{{.}}</div>
                 {{/each}}
             </div>
-            <div style="margin-top:1em;">
+            <div style="margin-top:1em;clear:both;">
                 <button {{action "search"}} class="btn">Search</button>
             </div>
             {{! Preload our SIL font}}
