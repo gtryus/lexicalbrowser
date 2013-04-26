@@ -1,0 +1,13 @@
+﻿Char	Unicode
+ŋ	014b
+ɒ	0252
+ɔ	0254
+ə	0259
+ɛ	025b
+ʼ	02bc (glottal)
+ː	02d0 (length)
+́	0301 (combining accent)
+̂	0302 (combining accent)
+̄	0304 (combining accent)
+̌	030c (combining accent)
+
