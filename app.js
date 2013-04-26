@@ -6,18 +6,11 @@ var appEntriesById = _.chain(appEntries)
         if (entry.sense.id === undefined) { return ['', entry]; }
         return [entry.sense.id, entry];
     }).object().value();
-// Extended characters
-var appExtendedChars = ['á', 'ā', 'â', 'ǎ',
-    'ɒ', 'ɒ́', 'ɒ̄', 'ɒ̂', 'ɒ̌',
-    'ɛ', 'ɛ́', 'ɛ̄', 'ɛ̂', 'ɛ̌',
-    'é', 'ē', 'ê', 'ě',
-    'ə', 'ə́', 'ə̄', 'ə̂', 'ə̌',
-    'í', 'ī', 'î', 'ǐ',
-    'ó', 'ô', 'ō', 'ǒ',
-    'ɔ', 'ɔ́', 'ɔ̄', 'ɔ̂', 'ɔ̌',
-    'ú', 'ū', 'û', 'ǔ',
-    'ń', 'ḿ', 'ŋ', 'ŋ́',
-    'ʼ', 'ː'];
+var appKeyButtons = ['ɒ', 'ɛ', 'ə', 'ɔ', 'ŋ', '◌́', '◌̂', '◌̄', '◌̌', 'ʼ', 'ː'];
+var appKeyList = { "keyList": { "key": [{ "seq": "́A", "composite": "Á", "compUtf8": "00c1" }, { "seq": "́E", "composite": "É", "compUtf8": "00c9" }, { "seq": "́a", "composite": "á", "compUtf8": "00e1" }, { "seq": "̂a", "composite": "â", "compUtf8": "00e2" }, { "seq": "́e", "composite": "é", "compUtf8": "00e9" }, { "seq": "̂e", "composite": "ê", "compUtf8": "00ea" }, { "seq": "́i", "composite": "í", "compUtf8": "00ed" }, { "seq": "̂i", "composite": "î", "compUtf8": "00ee" }, { "seq": "́o", "composite": "ó", "compUtf8": "00f3" }, { "seq": "̂o", "composite": "ô", "compUtf8": "00f4" }, { "seq": "́u", "composite": "ú", "compUtf8": "00fa" }, { "seq": "̂u", "composite": "û", "compUtf8": "00fb" }, { "seq": "̄a", "composite": "ā", "compUtf8": 101 }, { "seq": "̄e", "composite": "ē", "compUtf8": 113 }, { "seq": "̌e", "composite": "ě", "compUtf8": "011b" }, { "seq": "̄i", "composite": "ī", "compUtf8": "012b" }, { "seq": "́n", "composite": "ń", "compUtf8": 144 }, { "seq": "̄o", "composite": "ō", "compUtf8": "014d" }, { "seq": "̄u", "composite": "ū", "compUtf8": "016b" }, { "seq": "̌a", "composite": "ǎ", "compUtf8": "01ce" }, { "seq": "̌i", "composite": "ǐ", "compUtf8": "01d0" }, { "seq": "̌o", "composite": "ǒ", "compUtf8": "01d2" }, { "seq": "̌u", "composite": "ǔ", "compUtf8": "01d4" }, { "seq": "́M", "composite": "Ḿ", "compUtf8": "1e3e" }, { "seq": "́m", "composite": "ḿ", "compUtf8": "1e3f" }] } };
+var appKeyBySeq = _.chain(appKeyList.keyList.key).map(function (key) {
+    return [key.seq, key];
+}).object().value();
 
 // Takes an entry, returns it's synonym entries
 function synonyms(entry) {
@@ -69,10 +62,29 @@ App.IndexController = Ember.Controller.extend({
     },
 
     // Some sequences are single characters some are two unicode code points: a base char and an accent
-    specialCharacters: appExtendedChars,
+    specialKeys: appKeyButtons,
 
-    append: function (ch) {
+    insert: function (ch) {
+        var e, col = '', seq;
         this.set('query', this.get('query') + ch);
+        var len = this.query.length;
+        if (len >= 2) {
+            var holder = len - 2;
+            if (this.query[holder] === "◌") {
+                holder = holder - 1;
+                for (e = 0; e < holder; e++) {
+                    col = col + this.query[e];
+                }
+                seq = this.query[holder] + this.query[holder + 2]
+                var look = seq[1] + seq[0]
+                if (appKeyBySeq[look] !== undefined) {
+                    col = col + appKeyBySeq[look].composite;
+                } else {
+                    col = col + seq;
+                }
+                this.set('query', col)
+            }
+        }
         $('input[type=search]').focus();
     }
 });
@@ -91,10 +103,29 @@ App.SearchController = Ember.Controller.extend({
     },
 
     // Some sequences are single characters some are two unicode code points: a base char and an accent
-    specialCharacters: appExtendedChars,
+    specialKeys: appKeyButtons,
 
-    append: function(ch) {
+    insert: function (ch) {
+        var e, col = '', seq;
         this.set('query', this.get('query') + ch);
+        var len = this.query.length;
+        if (len >= 2) {
+            var holder = len - 2;
+            if (this.query[holder] === "◌") {
+                holder = holder - 1;
+                for (e = 0; e < holder; e++) {
+                    col = col + this.query[e];
+                }
+                seq = this.query[holder] + this.query[holder + 2]
+                var look = seq[1] + seq[0]
+                if (appKeyBySeq[look] !== undefined) {
+                    col = col + appKeyBySeq[look].composite;
+                } else {
+                    col = col + seq;
+                }
+                this.set('query', col)
+            }
+        }
         $('input[type=search]').focus();
     }
 });

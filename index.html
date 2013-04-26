@@ -33,8 +33,8 @@
             {{view Ember.TextField valueBinding="query" type="search" action="search" id="search-font"}}
             <i {{action "clear"}} class="icon-remove-circle" style="margin-top:-3px; margin-left:-22px;" onclick=""></i>
             <div class="specialFont">
-                {{#each controller.specialCharacters}}
-                <span {{action "append" .}} onclick="" style="cursor:pointer">{{.}}</span>
+                {{#each controller.specialKeys}}
+                <button {{action "insert" .}} class="btn">{{.}}</button>
                 {{/each}}
             </div>
             <div style="margin-top:1em;">
@@ -51,13 +51,13 @@
             <i {{action "clear"}} class="icon-remove-circle" style="margin-top:-3px; margin-left:-22px;" onclick=""></i>
 
             <div class="startfloat"></div>
-            <div class="specialFont" id="specialCharactersBar">
-                {{#each controller.specialCharacters}}
-                <div {{action "append" .}} onclick="" style="cursor:pointer">{{.}}</div>
+
+            <div class="specialFont">
+                {{#each controller.specialKeys}}
+                <button {{action "insert" .}} class="btn">{{.}}</button>
                 {{/each}}
             </div>
-
-            <table class="table">
+            <table class="table" style="margin-top:1em;">
                 {{#each controller.results}}
                     <tr>
                         <td><strong class="specialFont"> {{#linkTo "search" form}}{{form}}{{/linkTo}}</strong> - <small>{{sense.category}},</small> {{#linkTo "search" sense.gloss}}/{{sense.gloss}}/{{/linkTo}}</td>
