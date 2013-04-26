@@ -11,3 +11,29 @@
 .specialFont, #search-font {
     font-family: CharisSILB;
 }
+
+#specialCharactersBar {
+    position:relative;
+    float:left;
+    left:50%;
+}
+
+#specialCharactersBar div 
+{
+    padding-top: 10.5px; 
+    padding-bottom: 10.5px; 
+    padding-left: 2.5px;
+    padding-right: 2.5px;
+    display: run-in;
+    position:relative;
+    float: left;
+    left:-50%;
+}
+
+#specialCharactersBar div:hover 
+{
+    background-color: #ffd800; /* yellow */
+    font-size:xx-large;
+    position:relative;
+    top:-10px;
+}
