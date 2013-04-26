@@ -8,6 +8,6 @@
     text-align:center;
 }
 
-.specialFont, #search-font {
+.specialFont, #search-font, .btn {
     font-family: CharisSILB;
 }

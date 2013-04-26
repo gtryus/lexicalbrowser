@@ -7,7 +7,7 @@ var appEntriesById = _.chain(appEntries)
         return [entry.sense.id, entry];
     }).object().value();
 var appKeyButtons = ['ɒ', 'ɛ', 'ə', 'ɔ', 'ŋ', '◌́', '◌̂', '◌̄', '◌̌', 'ʼ', 'ː'];
-var appKeyList = { "keyList": { "key": [{ "seq": "́A", "composite": "Á", "compUtf8": "00c1" }, { "seq": "́E", "composite": "É", "compUtf8": "00c9" }, { "seq": "́a", "composite": "á", "compUtf8": "00e1" }, { "seq": "̂a", "composite": "â", "compUtf8": "00e2" }, { "seq": "́e", "composite": "é", "compUtf8": "00e9" }, { "seq": "̂e", "composite": "ê", "compUtf8": "00ea" }, { "seq": "́i", "composite": "í", "compUtf8": "00ed" }, { "seq": "̂i", "composite": "î", "compUtf8": "00ee" }, { "seq": "́o", "composite": "ó", "compUtf8": "00f3" }, { "seq": "̂o", "composite": "ô", "compUtf8": "00f4" }, { "seq": "́u", "composite": "ú", "compUtf8": "00fa" }, { "seq": "̂u", "composite": "û", "compUtf8": "00fb" }, { "seq": "̄a", "composite": "ā", "compUtf8": 101 }, { "seq": "̄e", "composite": "ē", "compUtf8": 113 }, { "seq": "̌e", "composite": "ě", "compUtf8": "011b" }, { "seq": "̄i", "composite": "ī", "compUtf8": "012b" }, { "seq": "́n", "composite": "ń", "compUtf8": 144 }, { "seq": "̄o", "composite": "ō", "compUtf8": "014d" }, { "seq": "̄u", "composite": "ū", "compUtf8": "016b" }, { "seq": "̌a", "composite": "ǎ", "compUtf8": "01ce" }, { "seq": "̌i", "composite": "ǐ", "compUtf8": "01d0" }, { "seq": "̌o", "composite": "ǒ", "compUtf8": "01d2" }, { "seq": "̌u", "composite": "ǔ", "compUtf8": "01d4" }, { "seq": "́M", "composite": "Ḿ", "compUtf8": "1e3e" }, { "seq": "́m", "composite": "ḿ", "compUtf8": "1e3f" }] } };
+var appKeyList = { "keyList": { "key": [{ "seq": "Á", "composite": "Á", "compUtf8": "00c1" }, { "seq": "É", "composite": "É", "compUtf8": "00c9" }, { "seq": "á", "composite": "á", "compUtf8": "00e1" }, { "seq": "â", "composite": "â", "compUtf8": "00e2" }, { "seq": "é", "composite": "é", "compUtf8": "00e9" }, { "seq": "ê", "composite": "ê", "compUtf8": "00ea" }, { "seq": "í", "composite": "í", "compUtf8": "00ed" }, { "seq": "î", "composite": "î", "compUtf8": "00ee" }, { "seq": "ó", "composite": "ó", "compUtf8": "00f3" }, { "seq": "ô", "composite": "ô", "compUtf8": "00f4" }, { "seq": "ú", "composite": "ú", "compUtf8": "00fa" }, { "seq": "û", "composite": "û", "compUtf8": "00fb" }, { "seq": "ā", "composite": "ā", "compUtf8": 101 }, { "seq": "ē", "composite": "ē", "compUtf8": 113 }, { "seq": "ě", "composite": "ě", "compUtf8": "011b" }, { "seq": "ī", "composite": "ī", "compUtf8": "012b" }, { "seq": "ń", "composite": "ń", "compUtf8": 144 }, { "seq": "ō", "composite": "ō", "compUtf8": "014d" }, { "seq": "ū", "composite": "ū", "compUtf8": "016b" }, { "seq": "ǎ", "composite": "ǎ", "compUtf8": "01ce" }, { "seq": "ǐ", "composite": "ǐ", "compUtf8": "01d0" }, { "seq": "ǒ", "composite": "ǒ", "compUtf8": "01d2" }, { "seq": "ǔ", "composite": "ǔ", "compUtf8": "01d4" }, { "seq": "Ḿ", "composite": "Ḿ", "compUtf8": "1e3e" }, { "seq": "ḿ", "composite": "ḿ", "compUtf8": "1e3f" }] } };
 var appKeyBySeq = _.chain(appKeyList.keyList.key).map(function (key) {
     return [key.seq, key];
 }).object().value();
@@ -31,6 +31,28 @@ function search(query) {
     });
     // Now get the synonyms of those entries, instead of the entries themselves.
     return _.chain(matches).map(synonyms).flatten(true).compact().value();
+}
+
+function insertCh(ctx, ch) {
+    var e, col = '', seq;
+    ctx.set('query', ctx.get('query') + ch);
+    var len = ctx.query.length;
+    if (len >= 2) {
+        var holder = len - 2;
+        if (ctx.query[holder] === "◌") {
+            holder = holder - 1;
+            for (e = 0; e < holder; e++) {
+                col = col + ctx.query[e];
+            }
+            seq = ctx.query[holder] + ctx.query[holder + 2];
+            if (appKeyBySeq[seq] !== undefined) {
+                col = col + appKeyBySeq[seq].composite;
+            } else {
+                col = col + seq;
+            }
+            ctx.set('query', col)
+        }
+    }
 }
 
 App = Ember.Application.create();
@@ -65,26 +87,7 @@ App.IndexController = Ember.Controller.extend({
     specialKeys: appKeyButtons,
 
     insert: function (ch) {
-        var e, col = '', seq;
-        this.set('query', this.get('query') + ch);
-        var len = this.query.length;
-        if (len >= 2) {
-            var holder = len - 2;
-            if (this.query[holder] === "◌") {
-                holder = holder - 1;
-                for (e = 0; e < holder; e++) {
-                    col = col + this.query[e];
-                }
-                seq = this.query[holder] + this.query[holder + 2]
-                var look = seq[1] + seq[0]
-                if (appKeyBySeq[look] !== undefined) {
-                    col = col + appKeyBySeq[look].composite;
-                } else {
-                    col = col + seq;
-                }
-                this.set('query', col)
-            }
-        }
+        insertCh(this, ch);
         $('input[type=search]').focus();
     }
 });
@@ -106,26 +109,7 @@ App.SearchController = Ember.Controller.extend({
     specialKeys: appKeyButtons,
 
     insert: function (ch) {
-        var e, col = '', seq;
-        this.set('query', this.get('query') + ch);
-        var len = this.query.length;
-        if (len >= 2) {
-            var holder = len - 2;
-            if (this.query[holder] === "◌") {
-                holder = holder - 1;
-                for (e = 0; e < holder; e++) {
-                    col = col + this.query[e];
-                }
-                seq = this.query[holder] + this.query[holder + 2]
-                var look = seq[1] + seq[0]
-                if (appKeyBySeq[look] !== undefined) {
-                    col = col + appKeyBySeq[look].composite;
-                } else {
-                    col = col + seq;
-                }
-                this.set('query', col)
-            }
-        }
+        insertCh(this, ch);
         $('input[type=search]').focus();
     }
 });
